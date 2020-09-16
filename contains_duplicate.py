@@ -17,3 +17,11 @@ class Solution:
             hashtable[n] = 1
         
         return False
+
+# convert array to a set, converting will remove duplicates
+# compare length of set to length of array
+# if not equal: the duplicates were removed from the array when converting to the set
+# if equal: there were no duplicates to remove 
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return len(set(nums)) != len(nums)
