@@ -6,40 +6,25 @@
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        l3 = ListNode()
-        current_l1= l1
-        current_l2 = l2
-        current_l3 = l3
-        remainder = 0
-        hashtable = {}
+        head = ListNode()
+        curr = head
+        r = 0
         
-        if l1.next is None and l2.next is None:
-            l3.val = l1.val + l2.val
-            if l3.val > 9:
-                l3.val = l3.val - 10
-                l3.next = ListNode(1)
-        
-        k = 0
-        while current_l1 is not None:
-            hashtable[k] = current_l1.val
-            current_l1 = current_l1.next
-            k += 1
+        while l1 or l2 or r:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
             
-        k = 0
-        while current_l2 is not None:
-            if hashtable[k]:
-                hashtable[k] += current_l2.val + remainder
-            else:
-                hashtable[k] = current_l2.val + remainder
+            result = v1 + v2 + r
+            if result > 9:
+                r = 1
+                result = result - 10
+            else: 
+                r = 0
                 
-            if hashtable[k] > 9:
-                hashtable[k] = hashtable[k] - 10
-                remainder = 1
-            else:
-                remainder = 0
-            current_l2 = current_l2.next
-            k += 1
+            curr.next = ListNode(result)
+            curr = curr.next
             
-        print(hashtable)
-            
-        return l3
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        
+        return head.next
